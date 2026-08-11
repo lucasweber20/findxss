@@ -1,4 +1,5 @@
 import argparse
+from scripts.URL import URL
 
 
 parser = argparse.ArgumentParser()
@@ -12,9 +13,15 @@ args = parser.parse_args()
 
 def main():
     url = args.url
-    file = args.file
-    thread = args.thred
+    file = args.list
+    thread = args.thread
     output = args.output
+
+    urls = URL()
+
+    # Remove duplicates
+    if file:
+        url = urls.remove_duplicates(file)
 
 if __name__ == "__main__":
     main()
