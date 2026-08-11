@@ -1,6 +1,8 @@
 import argparse
+import concurrent.futures
 from scripts.URL import URL
 from scripts.Parser import Parser
+from scripts.Requests import Requests
 
 
 parser = argparse.ArgumentParser()
@@ -13,6 +15,7 @@ args = parser.add_argument("-o", "--output", help="Specify output file, example:
 args = parser.parse_args()
 
 def main():
+    # Arguments flags
     url = args.url
     file = args.list
     thread = args.thread
@@ -33,6 +36,13 @@ def main():
         parsed_urls_params = parser.parser_params(payload)
         if parsed_urls_params:
             parsed_urls.append(parsed_urls_params)
+
+    # Requests
+    req = Requests()
+    with concurrent.futures.ThreadPoolExecutor(max_workers=thread) as executor:
+        futures = [executor.submit(req.requests, url) for url in parsed_urls]
+        for future in concurrent.futures.as_completed(futures):
+            result = future.result()
 
 if __name__ == "__main__":
     main()
