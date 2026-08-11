@@ -1,5 +1,6 @@
 import argparse
 from scripts.URL import URL
+from scripts.Parser import Parser
 
 
 parser = argparse.ArgumentParser()
@@ -17,11 +18,21 @@ def main():
     thread = args.thread
     output = args.output
 
+    payload = """findxss><"'"""
+
     urls = URL()
 
     # Remove duplicates
     if file:
         url = urls.remove_duplicates(file)
+
+    # Parser
+    parsed_urls = []
+    for parser_url in url:
+        parser = Parser(parser_url)
+        parsed_urls_params = parser.parser_params(payload)
+        if parsed_urls_params:
+            parsed_urls.append(parsed_urls_params)
 
 if __name__ == "__main__":
     main()
