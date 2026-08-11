@@ -3,6 +3,7 @@ import concurrent.futures
 from scripts.URL import URL
 from scripts.Parser import Parser
 from scripts.Requests import Requests
+from scripts.XSS import XSS
 
 
 parser = argparse.ArgumentParser()
@@ -43,6 +44,13 @@ def main():
         futures = [executor.submit(req.requests, url) for url in parsed_urls]
         for future in concurrent.futures.as_completed(futures):
             result = future.result()
+            if result:
+                url = result[0]
+                body = result[1]
+
+                # Check if payload reflected
+                if "findxss" in body:
+                    print(f"Reflected: \033[92m{url}\033[00m")
 
 if __name__ == "__main__":
     main()
