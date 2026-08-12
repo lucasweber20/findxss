@@ -4,6 +4,7 @@ from scripts.URL import URL
 from scripts.Parser import Parser
 from scripts.Requests import Requests
 from scripts.XSS import XSS
+import time
 
 
 parser = argparse.ArgumentParser()
