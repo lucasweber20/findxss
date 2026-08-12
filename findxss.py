@@ -52,5 +52,9 @@ def main():
                 if "findxss" in body:
                     print(f"Reflected: \033[92m{url}\033[00m")
 
+                    # Check characters if reflected
+                    xss = XSS()
+                    check_chars = xss.check_chars(body)
+
 if __name__ == "__main__":
     main()
