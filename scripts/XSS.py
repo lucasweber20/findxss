@@ -21,7 +21,7 @@ class XSS:
                 if "findxss" in str(t.string): 
                     for char in chars:
                         if char in t.string:
-                            print(f"Char reflected: {char}")
+                            print(f"Char reflected: \033[92m{char}\033[00m")
                             counter += 1
                             if counter == 4:
                                 if "script" in t.name:
@@ -34,7 +34,7 @@ class XSS:
                     if "findxss" in t[attr]:
                         for char in chars:
                             if char in t[attr]:
-                                print(f"Char reflected: {char}")
+                                print(f"Char reflected: \033[92m{char}\033[00m")
                                 if '"' in t[attr] and "'" in t[attr]:
                                     attr_context.append(url)
                                     
@@ -62,5 +62,4 @@ class XSS:
                 attr_context = payloads["payloads"][2]["attr_context"]
                 for attr_payload in attr_context:
                     print(parser.parser_params(attr_payload))
-
-
+        print("\n")
