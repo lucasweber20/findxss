@@ -19,3 +19,5 @@ class XSS:
                             print(f"Char reflected: {char}")
                             if ">" in t.string and "<" in t.string:
                                 tag_context.append(url)
+
+                
