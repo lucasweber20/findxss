@@ -43,7 +43,7 @@ class XSS:
     def generate_payloads(self, url):
         with open("./db/payloads.yml", "r") as f:
             payloads = yaml.safe_load(f)
-
+            
         if url[0]: # HTML context
             for u in url[0]:
                 parser = Parser(u)

