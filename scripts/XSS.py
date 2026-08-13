@@ -5,13 +5,17 @@ class XSS:
     def __init__(self):
         pass
 
-    def check_chars(self, body):
+    def check_chars(self, body, url):
+        tag_context = []
         chars = [">", "<", '"', "'"]
         for line in body.split("\n"):
-            soup = BeautifulSoup(line)
-            for tag in soup.find_all():
-                for attr in tag.attrs:
+            soup = BeautifulSoup(line, 'html.parser')
+            for t in soup.findAll():
+
+                # Check payload between tags contexts
+                if "findxss" in str(t.string): 
                     for char in chars:
-                        if char in tag[attr]:
-                            print(f"Char reflected: \033[92m{char}\033[00m")
-                    
+                        if char in t.string:
+                            print(f"Char reflected: {char}")
+                            if ">" in t.string and "<" in t.string:
+                                tag_context.append(url)

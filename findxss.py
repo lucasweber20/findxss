@@ -55,7 +55,7 @@ def main():
 
                     # Check characters if reflected
                     xss = XSS()
-                    check_chars = xss.check_chars(body)
+                    check_chars = xss.check_chars(body, url)
 
 if __name__ == "__main__":
     main()
