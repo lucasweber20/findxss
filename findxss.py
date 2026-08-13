@@ -22,7 +22,7 @@ def main():
     thread = args.thread
     output = args.output
 
-    payload = """findxss><"'"""
+    payload = """FxSsfindxss><"'FxSs"""
 
     urls = URL()
 
