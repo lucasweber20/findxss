@@ -1,5 +1,6 @@
 import yaml
 from bs4 import BeautifulSoup
+from scripts.Parser import Parser
 
 
 class XSS:
@@ -42,13 +43,24 @@ class XSS:
     def generate_payloads(self, url):
         with open("./db/payloads.yml", "r") as f:
             payloads = yaml.safe_load(f)
-            
+
         if url[0]: # HTML context
-            html_context = payloads["payloads"][0]["html_context"]
+            for u in url[0]:
+                parser = Parser(u)
+                html_context = payloads["payloads"][0]["html_context"]
+                for html_payload in html_context:
+                    print(parser.parser_params(html_payload))
         elif url[1]: # JS context
-            js_context = payloads["payloads"][1]["js_context"]
-            print(js_context)
+            for u in url[1]:
+                parser = Parser(u)
+                js_context = payloads["payloads"][1]["js_context"]
+                for js_payload in js_context:
+                    print(parser.parser_params(js_payload))
         elif url[2]: # Attribute context
-            attr_context = payloads["payloads"][2]["attr_context"]
+            for u in url[2]:
+                parser = Parser(u)
+                attr_context = payloads["payloads"][2]["attr_context"]
+                for attr_payload in attr_context:
+                    print(parser.parser_params(attr_payload))
 
 
