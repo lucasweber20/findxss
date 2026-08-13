@@ -33,13 +33,16 @@ class XSS:
                 # Check payload into the attributes
                 for attr in t.attrs:
                     if "findxss" in t[attr]:
-                        match = re.search(r"FxSs.+FxSs", str(t))
-                        match_payload = match.group()
-                        for char in chars:
-                            if char in match_payload:
-                                print(f"Char reflected: \033[92m{char}\033[00m")
-                                if '"' in match_payload and "'" in match_payload:
-                                    attr_context.append(url)
+                        try:
+                            match = re.search(r"FxSs.+FxSs", str(t))
+                            match_payload = match.group()
+                            for char in chars:
+                                if char in match_payload:
+                                    print(f"Char reflected: \033[92m{char}\033[00m")
+                                    if '"' in match_payload and "'" in match_payload:
+                                        attr_context.append(url)
+                        except:
+                            continue
                                     
         return html_context, js_context, attr_context
 
@@ -67,3 +70,4 @@ class XSS:
                     print(parser.parser_params(attr_payload))
         print("\n")
 
+# https://revistapag.agricultura.rs.gov.br/ojs/index.php/revistapag/login?source=findxss
