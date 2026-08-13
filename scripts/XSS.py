@@ -67,4 +67,3 @@ class XSS:
                     print(parser.parser_params(attr_payload))
         print("\n")
 
-# https://revistapag.agricultura.rs.gov.br/ojs/index.php/revistapag/login?source=findxss
