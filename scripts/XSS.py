@@ -6,8 +6,10 @@ class XSS:
         pass
 
     def check_chars(self, body, url):
-        tag_context = []
+        html_context = []
+        js_context = []
         attr_context = []
+        counter = 0
         chars = [">", "<", '"', "'"]
         for line in body.split("\n"):
             soup = BeautifulSoup(line, 'html.parser')
@@ -18,8 +20,12 @@ class XSS:
                     for char in chars:
                         if char in t.string:
                             print(f"Char reflected: {char}")
-                            if ">" in t.string and "<" in t.string:
-                                tag_context.append(url)
+                            counter += 1
+                            if counter == 4:
+                                if "script" in t.name:
+                                    js_context.append(url)
+                                else:
+                                    html_context.append(url)
 
                 # Check payload into the attributes
                 for attr in t.attrs:
