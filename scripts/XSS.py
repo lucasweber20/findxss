@@ -7,6 +7,7 @@ class XSS:
 
     def check_chars(self, body, url):
         tag_context = []
+        attr_context = []
         chars = [">", "<", '"', "'"]
         for line in body.split("\n"):
             soup = BeautifulSoup(line, 'html.parser')
@@ -20,4 +21,11 @@ class XSS:
                             if ">" in t.string and "<" in t.string:
                                 tag_context.append(url)
 
-                
+                # Check payload into the attributes
+                for attr in t.attrs:
+                    if "findxss" in t[attr]:
+                        for char in chars:
+                            if char in t[attr]:
+                                print(f"Char reflected: {char}")
+                                if '"' in t[attr] and "'" in t[attr]:
+                                    attr_context.append(url)
