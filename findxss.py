@@ -4,7 +4,6 @@ from scripts.URL import URL
 from scripts.Parser import Parser
 from scripts.Requests import Requests
 from scripts.XSS import XSS
-import time
 
 
 parser = argparse.ArgumentParser()
@@ -56,6 +55,10 @@ def main():
                     # Check characters if reflected
                     xss = XSS()
                     check_chars = xss.check_chars(body, url)
+
+                    if check_chars:
+                        if output:
+                            write_file = open(output, "a").write(f"{url}\n")
 
 if __name__ == "__main__":
     main()

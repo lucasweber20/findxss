@@ -35,3 +35,5 @@ class XSS:
                                 print(f"Char reflected: {char}")
                                 if '"' in t[attr] and "'" in t[attr]:
                                     attr_context.append(url)
+                                    
+        return html_context, js_context, attr_context
