@@ -4,6 +4,7 @@ from scripts.URL import URL
 from scripts.Parser import Parser
 from scripts.Requests import Requests
 from scripts.XSS import XSS
+import time
 
 
 parser = argparse.ArgumentParser()
@@ -35,7 +36,7 @@ def main():
     for parser_url in url:
         parser = Parser(parser_url)
         parsed_urls_params = parser.parser_params(payload)
-        if parsed_urls_params:
+        if parsed_urls_params and parsed_urls_params not in parsed_urls:
             parsed_urls.append(parsed_urls_params)
 
     # Requests
