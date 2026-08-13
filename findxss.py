@@ -58,6 +58,7 @@ def main():
                     check_chars = xss.check_chars(body, url)
 
                     if check_chars:
+                        xss.generate_payloads(check_chars)
                         if output:
                             write_file = open(output, "a").write(f"{url}\n")
 

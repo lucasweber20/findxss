@@ -1,0 +1,10 @@
+payloads:
+    - html_context:
+        - teste1
+        - teste2
+    - js_context:
+        - teste3
+        - teste4
+    - attr_context:
+        - teste5
+        - teste6
