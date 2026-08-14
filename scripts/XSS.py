@@ -30,12 +30,15 @@ class XSS:
                                     if counter == 4:
                                         js_context.append(url)
                     else:
-                        for char in chars:
-                            if char in t.string:
-                                print(f"Char reflected: \033[92m{char}\033[00m")
-                                counter += 1
-                                if counter == 4:
-                                    html_context.append(url)
+                        matches = re.findall(r"FxSs.*FxSs", str(t))
+                        for match in matches:
+                            print(match)
+                            for char in chars:
+                                if char in match:
+                                    print(f"Char reflected: \033[92m{char}\033[00m")
+                                    counter += 1
+                                    if counter == 4:
+                                        html_context.append(url)
 
                 # Check payload into the attributes
                 for attr in t.attrs:
