@@ -17,7 +17,7 @@ class XSS:
         for line in body.split("\n"):
             soup = BeautifulSoup(line, 'html.parser')
             for t in soup.findAll():
-                
+
                 # Check payload between tags contexts
                 if "findxss" in str(t.string):
                     if "script" in t.name: # Check if <script>
@@ -39,18 +39,15 @@ class XSS:
 
                 # Check payload into the attributes
                 for attr in t.attrs:
-                    if "findxss" in t[attr] and t.string:
-                        try:
-                            matches = re.findall(r"FxSs.*FxSs", str(t))
-                            for match in matches:
-                                for char in chars:
-                                    if char in match:
-                                        print(f"Char reflected: \033[92m{char}\033[00m")
-                                        if '"' in match and "'" in match:
-                                            attr_context.append(url)
-                        except:
-                            continue
-                                    
+                    if "findxss" in t[attr]:
+                        matches = re.findall(r"FxSs.*FxSs", str(t))
+                        for match in matches:
+                            for char in chars:
+                                if char in match:
+                                    print(f"Char reflected: \033[92m{char}\033[00m")
+                                    if '"' in match and "'" in match:
+                                        attr_context.append(url)
+
         return html_context, js_context, attr_context
 
     def generate_payloads(self, url):
