@@ -22,7 +22,6 @@ class XSS:
                 if "findxss" in str(t.string):
                     for char in chars:
                         if char in t.string:
-                            print(t.string)
                             print(f"Char reflected: \033[92m{char}\033[00m")
                             counter += 1
                             if counter == 4:
