@@ -20,14 +20,21 @@ class XSS:
                 
                 # Check payload between tags contexts
                 if "findxss" in str(t.string):
-                    for char in chars:
-                        if char in t.string:
-                            print(f"Char reflected: \033[92m{char}\033[00m")
-                            counter += 1
-                            if counter == 4:
-                                if "script" in t.name:
-                                    js_context.append(url)
-                                else:
+                    if "script" in t.name: # Check if <script>
+                        matches = re.findall(r"FxSs.*FxSs", str(t))
+                        for match in matches:
+                            for char in chars:
+                                if char in match:
+                                    print(f"Char reflected: \033[92m{char}\033[00m")
+                                    counter += 1
+                                    if counter == 4:
+                                        js_context.append(url)
+                    else:
+                        for char in chars:
+                            if char in t.string:
+                                print(f"Char reflected: \033[92m{char}\033[00m")
+                                counter += 1
+                                if counter == 4:
                                     html_context.append(url)
 
                 # Check payload into the attributes
@@ -69,3 +76,5 @@ class XSS:
                 for attr_payload in attr_context:
                     print(parser.parser_params(attr_payload))
         print("\n")
+
+# https://alesc.sc.gov.br/agencia/?pesquisa=aaaa&categoria=aaaa
