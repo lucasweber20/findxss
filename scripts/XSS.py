@@ -32,7 +32,7 @@ class XSS:
 
                 # Check payload into the attributes
                 for attr in t.attrs:
-                    if "findxss" in t[attr]:
+                    if "findxss" in t[attr] and t.string:
                         try:
                             match = re.search(r"FxSs.+FxSs", str(t))
                             match_payload = match.group()
