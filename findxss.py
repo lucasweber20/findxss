@@ -56,7 +56,7 @@ def main():
                     print("===== \033[92mChars reflecteds\033[00m =====")
                     xss = XSS()
                     check_chars = xss.check_chars(body, url)
-
+                    
                     if check_chars:
                         print("===== \033[92mPayloads\033[00m =====")
                         xss.generate_payloads(check_chars)

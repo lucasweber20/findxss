@@ -22,6 +22,7 @@ class XSS:
                 if "findxss" in str(t.string):
                     for char in chars:
                         if char in t.string:
+                            print(t.string)
                             print(f"Char reflected: \033[92m{char}\033[00m")
                             counter += 1
                             if counter == 4:
@@ -34,13 +35,13 @@ class XSS:
                 for attr in t.attrs:
                     if "findxss" in t[attr] and t.string:
                         try:
-                            match = re.search(r"FxSs.+FxSs", str(t))
-                            match_payload = match.group()
-                            for char in chars:
-                                if char in match_payload:
-                                    print(f"Char reflected: \033[92m{char}\033[00m")
-                                    if '"' in match_payload and "'" in match_payload:
-                                        attr_context.append(url)
+                            matches = re.findall(r"FxSs.*FxSs", str(t))
+                            for match in matches:
+                                for char in chars:
+                                    if char in match:
+                                        print(f"Char reflected: \033[92m{char}\033[00m")
+                                        if '"' in match and "'" in match:
+                                            attr_context.append(url)
                         except:
                             continue
                                     
@@ -69,5 +70,3 @@ class XSS:
                 for attr_payload in attr_context:
                     print(parser.parser_params(attr_payload))
         print("\n")
-
-# https://revistapag.agricultura.rs.gov.br/ojs/index.php/revistapag/login?source=findxss
