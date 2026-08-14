@@ -76,5 +76,3 @@ class XSS:
                 for attr_payload in attr_context:
                     print(parser.parser_params(attr_payload))
         print("\n")
-
-# https://alesc.sc.gov.br/agencia/?pesquisa=aaaa&categoria=aaaa
