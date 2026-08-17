@@ -73,5 +73,3 @@ class XSS:
                 for attr_payload in attr_context:
                     print(parser.parser_params(attr_payload))
         print("\n")
-
-# https://www.mg.gov.br/instituicao_unidade/defensoria-publica-do-estado-de-minas-gerais-dpmg?field_estado_municipio_target_id=aaaa&page=aaaa
