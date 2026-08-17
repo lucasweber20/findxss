@@ -53,7 +53,7 @@ def main():
                     print(f"Reflected: \033[92m{url}\033[00m")
 
                     # Check characters if reflected
-                    print("===== \033[92mChars reflecteds\033[00m =====")
+                    print("===== \033[92mCharacter reflecteds\033[00m =====")
                     xss = XSS()
                     check_chars = xss.check_chars(body, url)
                     

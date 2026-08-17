@@ -17,7 +17,6 @@ class XSS:
         for line in body.split("\n"):
             soup = BeautifulSoup(line, 'html.parser')
             for t in soup.findAll():
-
                 # Check payload between tags contexts
                 if "findxss" in str(t.string):
                     if "script" in t.name: # Check if <script>
@@ -25,14 +24,14 @@ class XSS:
                         for match in matches:
                             for char in chars:
                                 if char in match:
-                                    print(f"Char reflected: \033[92m{char}\033[00m")
+                                    print(f"Character: \033[92m{char}\033[00m [JS context]")
                                     counter += 1
                                     if counter == 4:
                                         js_context.append(url)
                     else:
                         for char in chars:
                             if char in str(t.string):
-                                print(f"Char reflected: \033[92m{char}\033[00m")
+                                print(f"Character: \033[92m{char}\033[00m [HTML context]")
                                 counter += 1
                                 if counter == 4:
                                     html_context.append(url)
@@ -44,7 +43,7 @@ class XSS:
                         for match in matches:
                             for char in chars:
                                 if char in match:
-                                    print(f"Char reflected: \033[92m{char}\033[00m")
+                                    print(f"Character: \033[92m{char}\033[00m [Attribute context]")
                                     if '"' in match and "'" in match:
                                         attr_context.append(url)
 
