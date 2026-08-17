@@ -21,28 +21,24 @@ class XSS:
                 # Check payload between tags contexts
                 if "findxss" in str(t.string):
                     if "script" in t.name: # Check if <script>
-                        matches = re.findall(r"FxSs.*FxSs", str(t))
-                        for match in matches:
-                            for char in chars:
-                                if char in match:
-                                    print(f"Char reflected: \033[92m{char}\033[00m")
-                                    counter += 1
-                                    if counter == 4:
-                                        js_context.append(url)
+                        for char in chars:
+                            if char in str(t.string):
+                                print(f"Char reflected: \033[92m{char}\033[00m")
+                                counter += 1
+                                if counter == 4:
+                                    js_context.append(url)
                     else:
-                        matches = re.findall(r"FxSs.*FxSs", str(t))
-                        for match in matches:
-                            for char in chars:
-                                if char in match:
-                                    print(f"Char reflected: \033[92m{char}\033[00m")
-                                    counter += 1
-                                    if counter == 4:
-                                        html_context.append(url)
+                        for char in chars:
+                            if char in str(t.string):
+                                print(f"Char reflected: \033[92m{char}\033[00m")
+                                counter += 1
+                                if counter == 4:
+                                    html_context.append(url)
 
                 # Check payload into the attributes
                 for attr in t.attrs:
                     if "findxss" in t[attr]:
-                        matches = re.findall(r"FxSs.*FxSs", str(t))
+                        matches = re.findall(r"FxSs.*FxSs", t[attr])
                         for match in matches:
                             for char in chars:
                                 if char in match:
