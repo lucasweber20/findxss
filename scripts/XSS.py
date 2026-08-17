@@ -17,6 +17,7 @@ class XSS:
         for line in body.split("\n"):
             soup = BeautifulSoup(line, 'html.parser')
             for t in soup.findAll():
+                
                 # Check payload between tags contexts
                 if "findxss" in str(t.string):
                     if "script" in t.name: # Check if <script>
