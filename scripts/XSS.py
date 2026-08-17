@@ -21,7 +21,7 @@ class XSS:
                 # Check payload between tags contexts
                 if "findxss" in str(t.string):
                     if "script" in t.name: # Check if <script>
-                        matches = re.findall(r"FxSs.*FxSs", str(t.string))
+                        matches = re.findall(r"FxSs.*FxSs", str(t))
                         for match in matches:
                             for char in chars:
                                 if char in match:
@@ -30,12 +30,14 @@ class XSS:
                                     if counter == 4:
                                         js_context.append(url)
                     else:
-                        for char in chars:
-                            if char in str(t.string):
-                                print(f"Character: \033[92m{char}\033[00m [HTML context]")
-                                counter += 1
-                                if counter == 4:
-                                    html_context.append(url)
+                        matches = re.findall(r"FxSs.*FxSs", str(t))
+                        for match in matches:
+                            for char in chars:
+                                if char in match:
+                                    print(f"Character: \033[92m{char}\033[00m [HTML context]")
+                                    counter += 1
+                                    if counter == 4:
+                                        html_context.append(url)
 
                 # Check payload into the attributes
                 for attr in t.attrs:
