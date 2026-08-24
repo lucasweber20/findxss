@@ -1,6 +1,5 @@
 import argparse
 import concurrent.futures
-from scripts.URL import URL
 from scripts.Parser import Parser
 from scripts.Requests import Requests
 from scripts.XSS import XSS
@@ -24,12 +23,9 @@ def main():
 
     payload = """FxSsfindxss><"'FxSs"""
 
-    urls = URL()
-
-    # Remove duplicates
     if file:
-        url = urls.remove_duplicates(file)
-
+        url = open(file, 'r').read().splitlines()
+        
     # Parser
     parsed_urls = []
     for parser_url in url:
