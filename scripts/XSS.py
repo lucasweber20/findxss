@@ -42,8 +42,9 @@ class XSS:
                 # Check payload into the attributes
                 for attr in t.attrs:
                     if "findxss" in t[attr]:
-                        matches = re.findall(r"FxSs.*FxSs", t[attr])
+                        matches = re.findall(r"FxSs.*FxSs", str(t))
                         for match in matches:
+                            print(match)
                             for char in chars:
                                 if char in match:
                                     print(f"Character: \033[92m{char}\033[00m [Attribute context]")
